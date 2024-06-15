@@ -7,6 +7,7 @@ public class Search {
         }
         return -1;
     }
+
     public static int binarySearch(int[] arr, int target) {
         int low = 0;
         int high = arr.length - 1;
