@@ -190,6 +190,157 @@ public class Main {
 
     }
 
+    public static int getAverageRaw(String algorithm, char length) {
+        final int cycles = 10000;
+        final int arrayLengthShort = 15;
+        final int arrayLengthMedium = 250;
+        final int arrayLengthLarge = 3500;
+        analysis = false;
+        averageCalculation = true;
+        int[] cyclesShort = new int[cycles];
+        int[] cyclesMedium = new int[cycles];
+        int[] cyclesLarge = new int[cycles];
+        long sumShort = 0;
+        long sumMedium = 0;
+        long sumLarge = 0;
+        switch (algorithm) {
+            case "bubble":
+                switch(length) {
+                    case 's':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.bubbleSort(Main.genArray(arrayLengthShort));
+                            long endTime = System.nanoTime();
+                            cyclesShort[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'm':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.bubbleSort(Main.genArray(arrayLengthMedium));
+                            long endTime = System.nanoTime();
+                            cyclesMedium[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'l':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.bubbleSort(Main.genArray(arrayLengthLarge));
+                            long endTime = System.nanoTime();
+                            cyclesLarge[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                }
+                break;
+            case "quick":
+                switch(length) {
+                    case 's':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.quickSort(Main.genArray(arrayLengthShort), 0, 10 - 1);
+                            long endTime = System.nanoTime();
+                            cyclesShort[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'm':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.quickSort(Main.genArray(arrayLengthMedium), 0, 50 - 1);
+                            long endTime = System.nanoTime();
+                            cyclesMedium[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'l':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.quickSort(Main.genArray(arrayLengthLarge), 0, 150 - 1);
+                            long endTime = System.nanoTime();
+                            cyclesLarge[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                }
+                break;
+            case "selection":
+                switch(length) {
+                    case 's':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.selectionSort(Main.genArray(arrayLengthShort));
+                            long endTime = System.nanoTime();
+                            cyclesShort[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'm':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.selectionSort(Main.genArray(arrayLengthMedium));
+                            long endTime = System.nanoTime();
+                            cyclesMedium[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'l':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.selectionSort(Main.genArray(arrayLengthLarge));
+                            long endTime = System.nanoTime();
+                            cyclesLarge[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                }
+                break;
+            case "insertion":
+                switch(length) {
+                    case 's':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.insertionSort(Main.genArray(arrayLengthShort));
+                            long endTime = System.nanoTime();
+                            cyclesShort[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'm':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.insertionSort(Main.genArray(arrayLengthMedium));
+                            long endTime = System.nanoTime();
+                            cyclesMedium[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                    case 'l':
+                        for (int i = 0; i < cycles; i++) {
+                            long startTime = System.nanoTime();
+                            Sort.insertionSort(Main.genArray(arrayLengthLarge));
+                            long endTime = System.nanoTime();
+                            cyclesLarge[i] = (int) (endTime - startTime);
+                        }
+                        break;
+                }
+                break;
+        }
+        switch(length) {
+            case 's':
+                for (int number : cyclesShort) {
+                    sumShort += number;
+                }
+                sumShort /= cycles;
+                return (int) sumShort;
+            case 'm':
+                for (int number : cyclesMedium) {
+                    sumMedium += number;
+                }
+                sumMedium /= cycles;
+                return (int) sumMedium;
+            case 'l':
+                for (int number : cyclesLarge) {
+                    sumLarge += number;
+                }
+                sumLarge /= cycles;
+                return (int) sumLarge;
+            default:
+                return -1;
+        }
+    }
+
     public static void main(String[] args) {
         int[] array = Main.genArray(15);
     }
